@@ -28,3 +28,13 @@ form {
     gap: 10px;
     border-radius: 10px;
 }
+
+textarea {
+    height: 80px;
+    padding: 10px;
+}
+
+button {
+    padding: 10px;
+    cursor: pointer;
+}
