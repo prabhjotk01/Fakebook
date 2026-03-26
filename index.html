@@ -15,20 +15,29 @@
         <header>
             <h2>Fakebook</h2>
 
-            <button id="accountBtn">My Account</button>
+            <nav class="nav-boxes">
+                <div class="nav-item">Friends</div>
+                <div class="nav-item">Pages</div>
+                <div class="nav-item">Groups</div>
+                <div class="nav-item">Settings</div>
+            </nav>
 
             <img src="assets/media/profile.png" alt="Profile" class="profile-pic">
 
         </header>
         <main>
             <div class="container">
-            <form id="postForm">
-                <textarea id="postText" placeholder="what's on your mind?"></textarea>
-                <input type="file" id="postImage">
-                <button type="submit" id="postBtn" disabled>Post</button>
-
+            
+                <div class="post-box">
+                    <textarea id="postText" placeholder="Hello"></textarea>
+                    <div class="post-actions">
+                        <label class="file-label">
+                        <input type="file" id="postImage">
+                        </label>
+                        <button id="postBtn" disabled>Post</button>
+                    </div>
+                </div>
                 <section id="posts"></section>
-            </form>
             </div>
         </main>
 
