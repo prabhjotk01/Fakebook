@@ -1,5 +1,5 @@
 'use strict';
-import { User } from "./user";
+import { User } from "./user.js";
 
 export class Subscriber extends User {
     #pages;
