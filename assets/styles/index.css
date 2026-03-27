@@ -86,10 +86,16 @@ button {
     gap: 10px;
 }
 
-.post img {
+.post-img {
     width: 100%;
     margin-top: 10px;
     border-radius: 10px;
+}
+
+.post-header .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
 }
 
 .modal {

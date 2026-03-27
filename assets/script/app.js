@@ -66,7 +66,7 @@ const profilePic = document.querySelector(".profile-pic");
 
         if (file) {
             let url = URL.createObjectURL(file);
-        img = "<img src='" + url + "'>";
+        img = "<img src='" + url + "' class='post-img'>";
   }
 
   
