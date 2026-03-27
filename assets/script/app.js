@@ -11,96 +11,96 @@ const user = new Subscriber(
   true
 );
 
-const postText = document.getElementById("postText");
-const postImage = document.getElementById("postImage");
-const postBtn = document.getElementById("postBtn");
-const posts = document.getElementById("posts");
+    const postText = document.getElementById("postText");
+    const postImage = document.getElementById("postImage");
+    const postBtn = document.getElementById("postBtn");
+    const posts = document.getElementById("posts");
 
-const modal = document.getElementById("modal");
-const closeModal = document.getElementById("closeModal");
-const userInfo = document.getElementById("userInfo");
-const profilePic = document.querySelector(".profile-pic");
+    const modal = document.getElementById("modal");
+    const closeModal = document.getElementById("closeModal");
+    const userInfo = document.getElementById("userInfo");
+    const profilePic = document.querySelector(".profile-pic");
 
-postText.addEventListener("input", () => {
-  if (postText.value.trim() !== "") {
-    postBtn.disabled = false;
-  } else {
-    if (postImage.files.length > 0) {
-      postBtn.disabled = false;
-    } else {
-      postBtn.disabled = true;
-    }
-  }
+
+    postText.addEventListener("input", () => {
+        postBtn.disabled = postText.value.trim() === "" && postImage.files.length === 0;
 });
 
-postImage.addEventListener("change", () => {
-  if (postImage.files.length > 0) {
-    postBtn.disabled = false;
-  } else {
-    if (postText.value.trim() !== "") {
-      postBtn.disabled = false;
-    } else {
-      postBtn.disabled = true;
-    }
-  }
+    postImage.addEventListener("change", () => {
+    postBtn.disabled = postText.value.trim() === "" && postImage.files.length === 0;
 });
 
-postBtn.addEventListener("click", () => {
-  let text = postText.value.trim();
-  let file = postImage.files[0];
 
-  if (text === "" && !file) {
-    return;
+    postBtn.addEventListener("click", () => {
+    const text = postText.value.trim();
+    const file = postImage.files[0];
+
+        if (text === "" && !file) return;
+
+  
+    const div = document.createElement("div");
+        div.className = "post";
+
+  
+    const header = document.createElement("div");
+        header.className = "post-header";
+
+    const profileImg = document.createElement("img");
+        profileImg.src = "assets/media/profile.png";
+        profileImg.className = "profile-pic";
+
+    const userInfoDiv = document.createElement("div");
+    const nameEl = document.createElement("strong");
+        nameEl.textContent = user.name;
+
+    const dateEl = document.createElement("small");
+        dateEl.textContent = new Date().toLocaleString();
+
+  
+    userInfoDiv.appendChild(nameEl);
+    userInfoDiv.appendChild(document.createElement("br"));
+    userInfoDiv.appendChild(dateEl);
+
+    header.appendChild(profileImg);
+    header.appendChild(userInfoDiv);
+    div.appendChild(header);
+
+  
+    if (text !== "") {
+        const p = document.createElement("p");
+        p.textContent = text;
+        div.appendChild(p);
   }
 
-  let div = document.createElement("div");
-  div.className = "post";
-
-  let date = new Date().toLocaleString();
-
-  let img = "";
-
-  if (file) {
-    let url = URL.createObjectURL(file);
-    img = "<img src='" + url + "' class='post-img'>"; 
+  
+    if (file) {
+        const img = document.createElement("img");
+        img.src = URL.createObjectURL(file);
+        img.className = "post-img";
+        div.appendChild(img);
   }
 
-  div.innerHTML = "";
+  
+    posts.prepend(div);
 
-  div.innerHTML += "<div class='post-header'>";
-  div.innerHTML += "<img src='assets/media/profile.png' class='profile-pic'>";
-  div.innerHTML += "<div>";
-  div.innerHTML += "<strong>" + user.name + "</strong><br>";
-  div.innerHTML += "<small>" + date + "</small>";
-  div.innerHTML += "</div>";
-  div.innerHTML += "</div>";
-
-  if (text !== "") {
-    div.innerHTML += "<p>" + text + "</p>";
-  }
-
-  if (img !== "") {
-    div.innerHTML += img;
-  }
-
-  posts.prepend(div);
-
-  postText.value = "";
-  postImage.value = "";
-  postBtn.disabled = true;
+  
+    postText.value = "";
+    postImage.value = "";
+    postBtn.disabled = true;
 });
 
-profilePic.addEventListener("click", () => {
+
+    profilePic.addEventListener("click", () => {
   modal.style.display = "block";
   userInfo.innerHTML = user.getInfo();
 });
 
-closeModal.addEventListener("click", () => {
-  modal.style.display = "none";
+    closeModal.addEventListener("click", () => {
+      modal.style.display = "none";
 });
 
-window.addEventListener("click", (e) => {
-  if (e.target === modal) {
-    modal.style.display = "none";
+    window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+        modal.style.display = "none";
   }
 });
